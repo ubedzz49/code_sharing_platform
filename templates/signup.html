@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CODE SHARING</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333333; /* Dark grey */
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+            overflow-y: auto; /* Enable vertical scrolling */
+        }
+
+        .header {
+            background-color: #444444; /* Slightly lighter grey */
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            box-sizing: border-box;
+        }
+
+        .header h1 {
+            color: white;
+            margin: 0;
+        }
+
+        .header p {
+            color: #e0e0e0; /* Light grey */
+            margin: 0;
+        }
+
+        .container {
+            margin-top: 120px; /* Offset to avoid overlap with header */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            max-width: 600px; /* Fixed width for container */
+            padding: 20px;
+            background-color: #1a1a1a; /* Dark grey */
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-container {
+            background-color: #222222; /* Darker grey */
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        label {
+            color: #dcdcdc; /* Light grey */
+            font-size: 16px;
+            display: block;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            background-color: #333333; /* Dark grey */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        button {
+            background-color: #555555; /* Grey */
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: fit-content;
+            margin-top: 10px;
+        }
+
+        .signup-link {
+            color: #dcdcdc;
+            margin-top: 10px;
+        }
+
+        footer {
+            background-color: #222222; /* Dark grey */
+            color: #dcdcdc;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        footer a {
+            color: #dcdcdc;
+            text-decoration: none;
+        }
+
+        .messages {
+            padding: 15px;
+            background-color: #f8d7da;
+            color: #721c24;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .messages.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .messages.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .messages.warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header style="background-color: #333333; padding: 20px; text-align: center; width: ;">
+        <h1 style="color: white; margin: 0;">WELCOME TO MY CODE SHARING PLATFORM</h1>
+        <p style="color: #dcdcdc;">CODE THERE COLLABORATE HERE</p>
+    </header>
+
+    <div class="container">
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="form-container">
+            <h2 style="color: #e0e0e0; font-size: 28px;">Sign Up</h2>
+            <form method="POST" action="{% url 'signup' %}">
+                {% csrf_token %}
+                <div style="margin-bottom: 15px;">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required>
+                </div>
+                <button type="submit" style="display: block; margin: 20px auto; padding: 12px 30px; background-color: #555555; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                    Sign Up
+                </button>
+                
+            </form>
+            <p class="signup-link" style="text-align: center; color: #e0e0e0;">Already have an account? <a href="{% url 'login' %}" style="color: white;">Login here</a></p>
+
+        </div>
+    </div>
+
+    <footer style="background-color: #333333; color: #dcdcdc; text-align: center; padding: 20px 0; margin-top: 40px; width: 100%;">
+        <div style="max-width: 900px; margin: 0 auto; padding: 0 20px;">
+            <p style="font-size: 14px; margin: 5px 0;">Developed by <strong style="color: white;">Sayyed Ubed Ali</strong></p>
+            <p style="font-size: 14px; margin: 5px 0;">
+                <a href="https://www.linkedin.com/in/ubedzz49/" style="color: #dcdcdc; text-decoration: none;" target="_blank">LinkedIn</a> |
+                <a href="https://github.com/ubedzz49" style="color: #dcdcdc; text-decoration: none;" target="_blank">GitHub</a> |
+                <a href="mailto:ubedzz5573@gmail.com" style="color: #dcdcdc; text-decoration: none;">Email</a> |
+                <a href="tel:+917869828430" style="color: #dcdcdc; text-decoration: none;">WhatsApp</a>
+            </p>
+        </div>
+    </footer>
+    
+</body>
+</html>

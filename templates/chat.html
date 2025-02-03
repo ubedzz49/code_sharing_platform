@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CODE SHARING</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212; /* Black background */
+            color: white; /* White text color */
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #1A1A1A; /* Dark grey background */
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #444444; /* Medium grey border */
+        }
+
+        header h1 {
+            color: white; /* White color for header text */
+            margin: 0;
+        }
+
+        header p {
+            color: #B0B0B0; /* Light grey text */
+            font-size: 1.1em;
+        }
+
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            max-width: 900px;
+            margin: 40px auto;
+            background-color: #1E1E1E; /* Dark grey background */
+            border-radius: 12px;
+            padding: 25px;
+            height: 400px;
+            overflow-y: auto;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 12px;
+            border-radius: 10px;
+            background-color: #333333; /* Medium grey background for messages */
+            color: white; /* White text */
+            max-width: 80%;
+        }
+
+        .message.user {
+            background-color: #444444; /* Slightly lighter grey for user messages */
+            text-align: right;
+            margin-left: auto;
+        }
+
+        .message p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .chat-input-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .chat-input-container form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .chat-input-container textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            background-color: #333333; /* Medium grey background for textarea */
+            color: white; /* White text */
+            border: none;
+            font-size: 14px;
+            resize: none;
+            margin-bottom: 15px;
+        }
+
+        .chat-input-container textarea:focus {
+            background-color: #444444; /* Slightly lighter grey on focus */
+        }
+
+        .chat-input-container button {
+            padding: 12px;
+            background-color: #444444; /* Lighter grey for the button */
+            color: white; /* White text */
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .chat-input-container button:hover {
+            background-color: #555555; /* Even lighter grey on hover */
+        }
+
+        footer {
+            background-color: #1A1A1A; /* Dark grey background */
+            color: #B0B0B0; /* Light grey text */
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 2px solid #444444; /* Medium grey border */
+        }
+
+        footer a {
+            color: #B0B0B0; /* Light grey links */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: white; /* White color on hover */
+        }
+
+        /* Message User Name Style */
+        .message strong {
+            color: #B0B0B0; /* Light grey for username */
+        }
+
+        /* Timestamp style */
+        .message .timestamp {
+            font-size: 12px;
+            color: #B0B0B0; /* Light grey for timestamp */
+            font-weight: bold;
+            margin-top: 3%;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header style="background-color: #333333; padding: 20px; text-align: center; width: ;">
+        <h1 style="color: white; margin: 0;">WELCOME TO MY CODE SHARING PLATFORM</h1>
+        <p style="color: #dcdcdc;">CODE THERE COLLABORATE HERE</p>
+    </header>
+
+<header>
+    <h1>CHATROOM</h1>
+</header>
+
+<div class="chat-container">
+    {% for message in messages %}
+        <div class="message {% if message.user == user.username %}user{% endif %}">
+            <p><strong>{{ message.user }}</strong></p>
+            <p>{{ message.content }}</p>
+            <p class="timestamp">{{ message.timestamp }}</p>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="chat-input-container">
+    <form method="POST">
+        {% csrf_token %}
+        <textarea name="message" rows="3" placeholder="Type your message..." required></textarea>
+        <button type="submit" style="width: 100px; height: 50px; font-size: 16px; display: block; margin: 0 auto;">Send</button>
+
+    </form>
+</div>
+<footer style="background-color: #333333; color: #dcdcdc; text-align: center; padding: 20px 0; margin-top: 40px; width: 100%;">
+    <div style="max-width: 900px; margin: 0 auto; padding: 0 20px;">
+        <p style="font-size: 14px; margin: 5px 0;">Developed by <strong style="color: white;">Sayyed Ubed Ali</strong></p>
+        <p style="font-size: 14px; margin: 5px 0;">
+            <a href="https://www.linkedin.com/in/ubedzz49/" style="color: #dcdcdc; text-decoration: none;" target="_blank">LinkedIn</a> |
+            <a href="https://github.com/ubedzz49" style="color: #dcdcdc; text-decoration: none;" target="_blank">GitHub</a> |
+            <a href="mailto:ubedzz5573@gmail.com" style="color: #dcdcdc; text-decoration: none;">Email</a> |
+            <a href="tel:+917869828430" style="color: #dcdcdc; text-decoration: none;">WhatsApp</a>
+        </p>
+    </div>
+</footer>
+
+
+</body>
+</html>
